@@ -42,26 +42,34 @@ router.get("/login", (req, res) => {
     res.render("auth/login.ejs", { error: null })
 })
 
-router.post('/login', async (req,res)=>{
-    try{
-        const userInDatabase = await User.findOne({username: req.body.username})
-        if (!userInDatabase){
-            return res.render('auth/login',{error: 'Username not found.'})
+router.post("/login", async (req, res) => {
+    try {
+        const userInDatabase = await User.findOne({ username: req.body.username });
+
+        if (!userInDatabase) {
+            return res.render("auth/login", { error: "Username not found." });
         }
-        const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password)
-        if (!validPassword){
-            return res.render('auth/login', {error: 'Incorrect password.'})
+
+        const validPassword = bcrypt.compareSync(
+            req.body.password,
+            userInDatabase.password
+        );
+
+        if (!validPassword) {
+            return res.render("auth/login", { error: "Incorrect password." });
         }
-        res.session.user = {
+
+        req.session.user = {
             username: userInDatabase.username,
-            _id: userInDatabase._id
-        }
-        res.redirect('/') //change it later
-    }catch(error){
-        console.error('Error during sign-in'.error)
-        res.render('auth/sign-in', {error: 'An unexpected error occurred.'})
+            _id: userInDatabase._id,
+        };
+
+        res.redirect("/login");
+    } catch (error) {
+        console.error("Error during sign-in:", error);
+        res.render("auth/sign-in", { error: "An unexpected error occurred." });
     }
-})
+});
 router.get("/logout", (req, res) => {
     req.session.destroy()
     res.redirect("/auth/login")
