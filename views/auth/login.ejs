@@ -7,5 +7,15 @@
 </head>
 <body>
     <h1>LOGIN</h1>
+    <form action="/auth/login" method="post">
+        <label for="username">username:</label>
+        <input type="text" name="username" id="username">
+        <label for="password">paswword:</label>
+        <input type="password" name="password" id="password">
+        <button>Login</button>
+    </form>
+    <%if(error){%>
+        <p><%=error%></p>
+    <%}%>
 </body>
 </html>
