@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 const dotenv = require('dotenv').config()
 const conntectToDB = require('./config/db')
 const projectRoutes = require('./routes/project.routes')
+const authRoutes = require('./routes/userRoutes')
 const session = require('express-session')
 
 //Middleware
@@ -24,6 +25,7 @@ conntectToDB()
 
 //Routes
 app.use('/projects', projectRoutes)
+app.use('/auth', authRoutes)
 
 
 
