@@ -9,6 +9,7 @@ const session = require('express-session')
 const projectRoutes = require('./routes/project.routes')
 const authRoutes = require('./routes/userRoutes')
 const isSignedIn = require('./middleware/isSignedIn')
+const passUserToView = require('./middleware/passUserToView')
 
 //Middleware
 app.use(express.static('public'))
@@ -21,6 +22,8 @@ app.use(session({secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
 }))
+
+app.use(passUserToView)
 
 conntectToDB()
 
