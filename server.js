@@ -5,9 +5,10 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 const dotenv = require('dotenv').config()
 const conntectToDB = require('./config/db')
+const session = require('express-session')
 const projectRoutes = require('./routes/project.routes')
 const authRoutes = require('./routes/userRoutes')
-const session = require('express-session')
+const isSignedIn = require('./middleware/isSignedIn')
 
 //Middleware
 app.use(express.static('public'))
@@ -24,9 +25,9 @@ app.use(session({secret: process.env.SESSION_SECRET,
 conntectToDB()
 
 //Routes
-app.use('/projects', projectRoutes)
 app.use('/auth', authRoutes)
-
+app.use(isSignedIn) 
+app.use('/projects', projectRoutes)
 
 
 const port = process.env.PORT || 3000
