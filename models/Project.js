@@ -9,17 +9,20 @@ const projectSchema = new mongoose.Schema({
         required:true
     },
     category:{
-        type:String
+        type:String,
+        enum: ['academic','professional','personal'],
+        required:true
     },
+    tags:String,
     date:{
         type:Date,
         default:Date.now
     },
+    attachments:[String],
     creator:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'creator'
     }
-    // file:
 })
 
 const Project = mongoose.model('Project', projectSchema)
