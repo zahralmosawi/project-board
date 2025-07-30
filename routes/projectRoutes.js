@@ -31,4 +31,30 @@ router.get('/:id', async(req,res)=>{
         console.log(error)
     }
 })
+
+router.get('/:id/edit', async(req,res)=>{
+    try{
+        const foundProject = await Project.findById(req.params.id)
+        res.render('project/project-edit.ejs', {foundProject})
+    }catch(error){
+        console.log(error)
+    }
+})
+
+router.put('/:id', async(req,res)=>{
+    try{
+        await Project.findByIdAndUpdate(req.params.id, req.body)
+        res.redirect('/project')
+    }catch(error){
+        console.log(error)
+    }
+})
+router.delete('/:id', async (req, res) => {
+    try {
+        await Project.findByIdAndDelete(req.params.id)
+        res.redirect('/project')
+    } catch (error) {
+        console.log(error)
+    }
+})
 module.exports = router

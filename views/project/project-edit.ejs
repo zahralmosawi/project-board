@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Edit</title>
+</head>
+<body>
+    <form action="/project/<%=foundProject._id%>?_method=PUT" method="post">
+        <label for="title">title:</label>
+        <input type="text" name="title" id="title" value="<%=foundProject.title%>">
+        <br>
+        <label for="description">description:</label>
+        <input type="text" name="description" id="description" value="<%=foundProject.description%>">
+        <br>
+        <label for="category">category:</label>
+        <input type="text" name="category" id="category" value="<%=foundProject.category%>">
+        <br>
+        <label for="tags">tags:</label>
+        <input type="text" name="tags" id="tags" value="<%=foundProject.tags%>">
+        <br>
+        <label for="date">date:</label>
+        <input type="date" name="date" id="date" value="<%=foundProject.date%>">
+        <br>
+        <label for="attachments">attachments:</label>
+        <input type="file" name="attachments" id="attachments" value="<%=foundProject.attachments%>">
+        <br>
+        <button>Update</button>
+    </form>
+    <form action="/project/<%= foundProject._id %>?_method=DELETE" method="post">
+            <button type="submit">Delete</button>
+    </form>
+</body>
+</html>
