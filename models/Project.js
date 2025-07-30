@@ -21,7 +21,8 @@ const projectSchema = new mongoose.Schema({
     attachments:[String],
     creator:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'creator'
+        ref: 'User',
+        required:true
     }
 })
 

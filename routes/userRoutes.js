@@ -39,7 +39,7 @@ router.post('/sign-up', async(req,res)=>{
 })
 
 router.get("/login", (req, res) => {
-    res.render("auth/login.ejs", { error: null })
+    res.render("auth/login.ejs", { error: null }) //!
 })
 
 router.post("/login", async (req, res) => {
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
             _id: userInDatabase._id,
         };
 
-        res.redirect("/login"); //change it later
+        res.redirect("/project/newProject") //change it later
     } catch (error) {
         console.error("Error during sign-in:", error);
         res.render("auth/sign-in", { error: "An unexpected error occurred." });

@@ -30,7 +30,7 @@ conntectToDB()
 //Routes
 app.use('/auth', authRoutes)
 app.use(isSignedIn) 
-app.use('/projects', projectRoutes)
+app.use('/project', projectRoutes)
 
 
 const port = process.env.PORT || 3000
