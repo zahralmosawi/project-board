@@ -22,4 +22,13 @@ router.get('/', async(req,res)=>{
         console.log(error)
     }
 })
+
+router.get('/:id', async(req,res)=>{
+    try{
+        foundProject = await Project.findById(req.params.id)
+        res.render('project/project-details.ejs')
+    }catch(error){
+        console.log(error)
+    }
+})
 module.exports = router
