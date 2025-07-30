@@ -13,7 +13,7 @@ const passUserToView = require('./middleware/passUserToView')
 
 //Middleware
 app.use(express.static('public'))
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.set('view engine', 'ejs') //more specific on which view engine we are using
