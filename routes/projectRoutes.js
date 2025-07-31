@@ -29,7 +29,7 @@ router.post('/newProject', async (req,res)=>{
 })
 router.get('/:id', async(req,res)=>{
     try{
-        foundProject = await Project.findById(req.params.id)
+        foundProject = await Project.findById(req.params.id).populate('creator')
         res.render('project/project-details.ejs')
     }catch(error){
         console.log(error)

@@ -12,7 +12,9 @@
    <p>project description: <%=foundProject.description%></p>
    <p>project category: <%=foundProject.category%></p>
    <p>project tags: <%=foundProject.tags%></p>
-   <p>project date: <%=foundProject.date%></p>
+   <% if (foundProject.date) { %>
+    <p>project date: <%= new Date(foundProject.date).toLocaleDateString() %></p>
+   <% } %>
    <p>project attachments: <%=foundProject.attachments%></p>
    <p>project creator: <%=foundProject.creator.username%></p>
    <a href="/project/<%= foundProject._id %>/edit">Edit</a>

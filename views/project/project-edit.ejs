@@ -9,10 +9,10 @@
     <%- include('../partials/navbar') %>
     <form action="/project/<%=foundProject._id%>?_method=PUT" method="post">
         <label for="title">title:</label>
-        <input type="text" name="title" id="title" value="<%=foundProject.title%>">
+        <input type="text" name="title" id="title" required placeholder="Enter project title" value="<%=foundProject.title%>">
         <br>
         <label for="description">description:</label>
-        <textarea name="description" id="description"><%=foundProject.description%></textarea><br>
+        <textarea name="description" id="description" required ><%=foundProject.description%></textarea><br>
         <br>
         <label for="category">category:</label>
         <select name="category" id="category">
@@ -23,13 +23,16 @@
             <option value="personal"<% if (foundProject.category === 'personal'){ %> selected <% } %>>
             personal</option>
         </select>
-        <!-- <input type="text" name="category" id="category" value="<%=foundProject.category%>"> -->
         <br>
         <label for="tags">tags:</label>
         <input type="text" name="tags" id="tags" value="<%=foundProject.tags%>">
         <br>
         <label for="date">date:</label>
-        <input type="date" name="date" id="date" value="<%=foundProject.date%>">
+        <% if (foundProject.date) { %>
+            <input type="date" name="date" id="date" value="<%= foundProject.date.toISOString().slice(0, 10) %>">
+        <% } else { %>
+            <input type="date" name="date" id="date">
+        <% } %>
         <br>
         <label for="attachments">attachments:</label>
         <input type="file" name="attachments" id="attachments" value="<%=foundProject.attachments%>">
