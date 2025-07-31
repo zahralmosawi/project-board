@@ -29,6 +29,15 @@ conntectToDB()
 
 //Routes
 app.use('/auth', authRoutes)
+
+// Root route - homepage
+app.get('/', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/auth/login');
+    }
+    res.render('index', { user: req.session.user })
+})
+
 app.use(isSignedIn) 
 app.use('/project', projectRoutes)
 

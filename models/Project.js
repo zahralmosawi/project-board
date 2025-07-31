@@ -13,7 +13,7 @@ const projectSchema = new mongoose.Schema({
         enum: ['academic','professional','personal'],
         required:true
     },
-    tags:String,
+    tags:[String],
     date:{
         type:Date,
         default:Date.now

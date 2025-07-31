@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project Hub</title>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <main>
+        <h1>Welcome to Project Hub</h1>
+        <% if (user) { %>
+            <a href="/project/all">Go To My Projects</a>
+            <a href="/project/newProject">Add More</a>
+        <% } else { %>
+            <a href="/auth/login">Login</a>
+            <a href="/auth/sign-up">Sign Up</a>
+        <% } %>
+    </main>
+    
+</body>
+</html>

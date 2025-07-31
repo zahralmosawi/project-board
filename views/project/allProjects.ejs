@@ -6,9 +6,10 @@
     <title>All Project</title>
 </head>
 <body>
+    <%- include('../partials/navbar') %>
     <h1>All Project</h1>
     <h2>Welcome, <%= user.username %>!</h2>
-    <%allProject.forEach((project)=>{%>
+    <%projects.forEach((project)=>{%>
         <p>project title:
         <%= project.title %>
         </p>

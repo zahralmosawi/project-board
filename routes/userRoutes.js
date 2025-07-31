@@ -64,10 +64,10 @@ router.post("/login", async (req, res) => {
             _id: userInDatabase._id,
         };
 
-        res.redirect("/project") 
+        res.redirect("/") 
     } catch (error) {
         console.error("Error during sign-in:", error);
-        res.render("auth/sign-in", { error: "An unexpected error occurred." });
+        res.render("auth/login", { error: "An unexpected error occurred." });
     }
 })
 

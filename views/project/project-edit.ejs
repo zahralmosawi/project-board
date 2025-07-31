@@ -6,12 +6,13 @@
     <title>Project Edit</title>
 </head>
 <body>
+    <%- include('../partials/navbar') %>
     <form action="/project/<%=foundProject._id%>?_method=PUT" method="post">
         <label for="title">title:</label>
         <input type="text" name="title" id="title" value="<%=foundProject.title%>">
         <br>
         <label for="description">description:</label>
-        <input type="text" name="description" id="description" value="<%=foundProject.description%>">
+        <textarea name="description" id="description"><%=foundProject.description%></textarea><br>
         <br>
         <label for="category">category:</label>
         <input type="text" name="category" id="category" value="<%=foundProject.category%>">
