@@ -15,7 +15,15 @@
         <textarea name="description" id="description"><%=foundProject.description%></textarea><br>
         <br>
         <label for="category">category:</label>
-        <input type="text" name="category" id="category" value="<%=foundProject.category%>">
+        <select name="category" id="category">
+            <option value="academic"<% if (foundProject.category === 'academic'){ %> selected <% } %>>
+            academic</option>
+            <option value="professional"<% if (foundProject.category === 'professional'){ %> selected <% } %>>
+            professional</option>
+            <option value="personal"<% if (foundProject.category === 'personal'){ %> selected <% } %>>
+            personal</option>
+        </select>
+        <!-- <input type="text" name="category" id="category" value="<%=foundProject.category%>"> -->
         <br>
         <label for="tags">tags:</label>
         <input type="text" name="tags" id="tags" value="<%=foundProject.tags%>">

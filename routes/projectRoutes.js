@@ -67,23 +67,4 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-// //READ
-// router.get('/', async(req,res)=>{
-//     try{
-//         const allProject = await Project.find()
-//         res.render('project/allProject.ejs',{allProject})
-//     }catch(error){
-//         console.log(error)
-//     }
-// })
-
-// router.get('/:id', async(req,res)=>{
-//     try{
-//         foundProject = await Project.findById(req.params.id)
-//         res.render('project/project-details.ejs')
-//     }catch(error){
-//         console.log(error)
-//     }
-// })
-
 module.exports = router
