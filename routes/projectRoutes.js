@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Project = require('../models/Project')
 const isSignedIn = require('../middleware/isSignedIn')
+const {cloudinary, upload} = require("../config/cloudinary")
 
 router.use(isSignedIn)
 
@@ -15,12 +16,26 @@ router.get('/all', async (req,res)=>{
 })
 //Display the form to add
 router.get('/newProject', (req,res) => {
-    res.render('project/newProject', { user: req.session.user })
+    res.render('project/newProject')
 })
 
-router.post('/newProject', async (req,res)=>{
+router.post('/newProject', upload.single("attachments"),async (req,res)=>{
     try{
-        await Project.create({...req.body, creator: req.session.user._id} )
+
+        const {title, description, date, attachments, category, tags} = req.body
+
+        const newProject = new Project({
+            title,
+            description,
+            date,
+            category,
+            tags,
+            creator: req.session.user._id,
+            attachments: req.file?.path || null
+        })
+
+        await newProject.save()
+
         res.redirect('/project/all')
     }catch(error){
         console.error(error)

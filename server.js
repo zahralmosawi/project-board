@@ -23,6 +23,11 @@ app.use(session({secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
 }))
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
+
 app.use(passUserToView)
 
 conntectToDB()

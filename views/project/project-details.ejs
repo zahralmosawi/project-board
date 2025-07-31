@@ -15,7 +15,10 @@
    <% if (foundProject.date) { %>
     <p>project date: <%= new Date(foundProject.date).toLocaleDateString() %></p>
    <% } %>
-   <p>project attachments: <%=foundProject.attachments%></p>
+   <% if(foundProject.attachments) {  %>
+    <p>project attachments:</p>
+    <img src="<%= foundProject.attachments %>"/>
+    <% } %>
    <p>project creator: <%=foundProject.creator.username%></p>
    <a href="/project/<%= foundProject._id %>/edit">Edit</a>
 </body>

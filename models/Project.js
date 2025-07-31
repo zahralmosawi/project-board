@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    attachments:[String],
+    attachments:String,
     creator:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
