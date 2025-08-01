@@ -10,6 +10,8 @@ const projectRoutes = require('./routes/projectRoutes')
 const authRoutes = require('./routes/userRoutes')
 const isSignedIn = require('./middleware/isSignedIn')
 const passUserToView = require('./middleware/passUserToView')
+const homeRoutes = require('./routes/home-routes')
+const Project = require('./models/Project')
 
 //Middleware
 app.use(express.static('public'))
@@ -32,16 +34,13 @@ app.use(passUserToView)
 
 conntectToDB()
 
-//Routes
-app.use('/auth', authRoutes)
-
-// Root route - homepage
-app.get('/', (req, res) => {
-    if (!req.session.user) {
-        return res.redirect('/auth/login');
-    }
-    res.render('index', { user: req.session.user })
+// Routes
+app.get('/', (req,res)=>{
+    res.render('home')
 })
+
+app.use('/home', homeRoutes)
+app.use('/auth', authRoutes)
 
 app.use(isSignedIn) 
 app.use('/project', projectRoutes)
@@ -53,7 +52,6 @@ const server = app.listen(port,()=>{
     console.log("Listening on port " + port)
 })
 
-//log error in the terminal if the port is used
 server.on('error', (error)=>{
     if(error.code === "EADDRINUSE"){
         console.error(`Port ${port} is already in use.`)

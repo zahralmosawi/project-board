@@ -1,8 +1,10 @@
-<% if(user){ %>
+<nav>
     <a href="/">Home</a>
-    <a href="/project/all">My Projects</a>
-    <a href="/auth/logout">Logout</a>
-<% }else{ %>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/sign-up">Sign Up</a>
-<% } %>
+    <% if (user) { %>
+        <span>Hello <%= user.name %></span>
+        <a href="/auth/logout">Logout</a>
+    <% } else { %>
+        <a href="/auth/login">Login</a>
+        <a href="/auth/sign-up">Sign Up</a>
+    <% } %>
+</nav>
