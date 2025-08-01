@@ -18,13 +18,18 @@
    <% if (project.attachments && project.attachments.length > 0) { %>
        <p>Attachments:</p>
        <div>
-        <% project.attachments.forEach((attachment)=>{ %>
+        <% project.attachments.forEach((attachment, index)=>{ %>
             <% if (attachment.url) { %>
              <% if (attachment.url.match(/\.(jpg|jpeg|png|gif)$/i)) { %>
                 <img src="<%= attachment.url %>" alt="Attachment" >
             <% }else{ %>
                 <a href="<%= attachment.url %>" target="_blank" style="text-decoration: none; color: #007bff;">📎 View File </a>
             <% } %>
+            <form action="/project/<%= project._id %>/attachment/<%= index %>?_method=DELETE" method="POST"> 
+               <button type="submit" style="color: red; border: none; background: none; cursor: pointer;">
+                🗑️ Delete
+               </button>
+            </form>
             <% } %>
         <% }) %>
        </div>

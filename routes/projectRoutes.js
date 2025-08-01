@@ -93,7 +93,7 @@ router.put('/:id', upload.array("attachments"), async(req,res)=>{
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async(req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.send('Invalid ID')
@@ -105,5 +105,27 @@ router.delete('/:id', async (req, res) => {
         res.send('Failed to delete project')
     }
 })
+
+router.delete('/:projectId/attachment/:attachmentIndex', async(req,res)=>{
+    try{
+        const {projectId, attachmentIndex} = req.params
+        const project = await Project.findById(projectId)
+
+        //validition
+        if(!project){
+            return res.send("Project not found")
+        }
+
+        project.attachments.splice(attachmentIndex, 1)
+        await project.save()
+
+        res.redirect(`/project/${projectId}/edit`)
+    }catch(error){
+        console.error(error)
+        res.send('Failed to delete attachment')
+    }
+})
+
+
 
 module.exports = router
