@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const Project = require('../models/Project')
 const isSignedIn = require('../middleware/isSignedIn')
-const {cloudinary, upload} = require("../config/cloudinary")
+const cloudinary  = require("../config/cloudinary")
+const upload = require('../middleware/upload')
+const mongoose = require('mongoose')
 
 router.use(isSignedIn)
 
@@ -19,10 +21,14 @@ router.get('/newProject', (req,res) => {
     res.render('project/newProject')
 })
 
-router.post('/newProject', upload.single("attachments"),async (req,res)=>{
+router.post('/newProject', upload.array("attachments"), async (req,res)=>{
     try{
 
-        const {title, description, date, attachments, category, tags} = req.body
+        const {title, description, date, category, tags} = req.body
+        const attachments = req.files.map(file => ({
+        url: file.path,
+        public_id: file.filename
+      }))
 
         const newProject = new Project({
             title,
@@ -31,7 +37,7 @@ router.post('/newProject', upload.single("attachments"),async (req,res)=>{
             category,
             tags,
             creator: req.session.user._id,
-            attachments: req.file?.path || null
+            attachments
         })
 
         await newProject.save()
@@ -44,6 +50,9 @@ router.post('/newProject', upload.single("attachments"),async (req,res)=>{
 })
 router.get('/:id', async(req,res)=>{
     try{
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.send('Invalid project ID')
+        }
         foundProject = await Project.findById(req.params.id).populate('creator')
         res.render('project/project-details.ejs')
     }catch(error){
@@ -75,6 +84,9 @@ router.put('/:id', async(req,res)=>{
 
 router.delete('/:id', async (req, res) => {
     try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.send('Invalid ID')
+        }
         await Project.findByIdAndDelete(req.params.id)
         res.redirect('/project/all')
     } catch (error) {

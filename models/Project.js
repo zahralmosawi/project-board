@@ -18,7 +18,10 @@ const projectSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    attachments:String,
+    attachments:{
+        url: String,
+        puclic_id: String
+    },
     creator:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
