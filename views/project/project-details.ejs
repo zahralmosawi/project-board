@@ -8,18 +8,29 @@
 <body>
    <%- include('../partials/navbar') %>
    <h1>project details</h1> 
-   <p>project title: <%=foundProject.title%></p>
-   <p>project description: <%=foundProject.description%></p>
-   <p>project category: <%=foundProject.category%></p>
-   <p>project tags: <%=foundProject.tags%></p>
-   <% if (foundProject.date) { %>
-    <p>project date: <%= new Date(foundProject.date).toLocaleDateString() %></p>
+   <p>project title: <%=project.title%></p>
+   <p>project description: <%=project.description%></p>
+   <p>project category: <%=project.category%></p>
+   <p>project tags: <%=project.tags%></p>
+   <% if (project.date) { %>
+    <p>project date: <%= new Date(project.date).toLocaleDateString() %></p>
    <% } %>
-   <% if(foundProject.attachments) {  %>
-    <p>project attachments:</p>
-    <img src="<%= foundProject.attachments %>"/>
+   <% if (project.attachments && project.attachments.length > 0) { %>
+       <p>Attachments:</p>
+       <div>
+        <% project.attachments.forEach((attachment)=>{ %>
+            <% if (attachment.url) { %>
+             <% if (attachment.url.match(/\.(jpg|jpeg|png|gif)$/i)) { %>
+                <img src="<%= attachment.url %>" alt="Attachment" >
+            <% }else{ %>
+                <a href="<%= attachment.url %>" target="_blank" style="text-decoration: none; color: #007bff;">📎 View File </a>
+            <% } %>
+            <% } %>
+        <% }) %>
+       </div>
     <% } %>
-   <p>project creator: <%=foundProject.creator.username%></p>
-   <a href="/project/<%= foundProject._id %>/edit">Edit</a>
+   <p>Creator:<%=project.creator.username%></p>
+   <a href="/project/<%= project._id %>/edit">Edit Project</a>
+   <a href="/project/all">Back to Projects</a>
 </body>
 </html>
