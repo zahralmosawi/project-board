@@ -1,10 +1,15 @@
-<nav>
-    <a href="/">Home</a>
-    <% if (user) { %>
-        <span>Hello <%= user.name %></span>
-        <a href="/auth/logout">Logout</a>
-    <% } else { %>
-        <a href="/auth/login">Login</a>
-        <a href="/auth/sign-up">Sign Up</a>
-    <% } %>
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-logo">
+            <img src="/images/PB-logo.png" alt="Project Board Logo" id="logo">
+        </div>
+        <div class="navbar-links">
+            <a href="/" class="navbar-link">Home</a>
+            <% if(user){ %>
+                <a href="/auth/logout" class="navbar-link">Logout</a>
+            <% }else{ %>
+                <a href="/auth/sign-up" class="navbar-link">Sign Up</a>
+            <% } %>
+        </div>
+    </div>
 </nav>

@@ -14,7 +14,12 @@ const homeRoutes = require('./routes/home-routes')
 const Project = require('./models/Project')
 
 //Middleware
-app.use(express.static('public'))
+// app.use(express.static('public'))
+// app.use(express.static(__dirname + '/public'))
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(path.join(__dirname, 'public/css')));
+app.use('/images', express.static(path.join(__dirname, 'public/images')))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))

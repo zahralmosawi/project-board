@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <title>Project Board - Login</title>
 </head>
 <body>
     <%- include('../partials/navbar') %>
-    <h1>LOGIN</h1>
     <form action="/auth/login" method="post">
-        <label for="username">username:</label>
-        <input type="text" name="username" id="username">
-        <label for="password">password:</label>
-        <input type="password" name="password" id="password">
-        <button>Login</button>
+        <span class="input-span">
+            <label for="username">username:</label>
+            <input type="text" name="username" id="username">
+        </span>
+        <span class="input-span">
+            <label for="password">password:</label>
+            <input type="password" name="password" id="password">
+        </span>
+        <input class="submit" type="submit" value="Log in" />
+        <span class="span">Don't have an account? <a href="/auth/sign-up">Sign up</a></span>
     </form>
-    <%if(error){%>
-        <p><%=error%></p>
-    <%}%>
+    <span class="error-message">
+        <% if(error){ %>
+            <p> <%= error %> </p>
+        <% } %>
+    </span>
 </body>
 </html>

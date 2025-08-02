@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+
+body {
+    background-color: #323232;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+}
+
+/* Form styling */
+form {
+    background-color: transparent;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 7rem auto;
+}
+
+/* Input fields styling */
+.input-span {
+    display: flex;
+    align-items: flex-end; 
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    font-size: 1.1rem;
+    color: #373636; 
+    color: #85857A; 
+    font-weight: 200;
+    min-width: 100px;
+    text-align: right;
+    padding-right: 1rem;
+    margin-bottom: -2px; 
+}
+
+input {
+    flex: 1;
+    padding: 0.5rem 0; 
+    border: none;
+    border-bottom: 2px solid #545454; 
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-bottom-color: #888; 
+}
+
+/* Submit button */
+.submit {
+    width: 50%;
+    padding: 0.8rem;
+    background-color: #888; 
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s;
+}
+
+.submit:hover {
+    background-color: #666; 
+}
+
+/* Sign up link */
+.span {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #777; 
+}
+
+.span a {
+    color: #555; 
+    text-decoration: none;
+    font-weight: 150;
+    transition: color 0.3s;
+}
+
+.span a:hover {
+    color: #333; 
+    text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+    color: #d9534f; 
+    text-align: center;
+    margin-top: 0.1rem;
+    font-weight: 200;
+}

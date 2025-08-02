@@ -8,7 +8,7 @@
 <body>
     <%- include('../partials/navbar', {user}) %>
      <main>
-        <h1>Welcome, <%= user.username %>!</h1>
+        <h1>Hello, <%= user.username %>!</h1>
         
         <% if (projects && projects.length > 0) { %>
             <h2>Your Projects:</h2>
