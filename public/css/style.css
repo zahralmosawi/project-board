@@ -28,6 +28,7 @@ p{
     margin-bottom: 2rem;
     z-index: 1; 
 }
+
 a{
     display: inline-flex;
     gap: 20px;
@@ -39,9 +40,11 @@ a{
     font-size: 20px;
     color: #ebe3e3;
 }
+
 a:hover{
     color: #85857A;
 }
+
 .logo {
     position: absolute;
     top:50px;
