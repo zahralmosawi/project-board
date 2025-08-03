@@ -3,59 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Edit</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <title>Edit Project</title>
 </head>
 <body>
     <%- include('../partials/navbar') %>
-    <form action="/project/<%=project._id%>?_method=PUT" method="post" enctype="multipart/form-data">
-        <label for="title">title:</label>
-        <input type="text" name="title" id="title" required value="<%=project.title%>">
-        <br>
-        <label for="description">description:</label>
-        <textarea name="description" id="description" required><%=project.description%></textarea><br>
-        <br>
-        <label for="category">category:</label>
-        <select name="category" id="category">
-            <option value="academic"<% if (project.category === 'academic'){ %> selected <% } %>>
-            academic</option>
-            <option value="professional"<% if (project.category === 'professional'){ %> selected <% } %>>
-            professional</option>
-            <option value="personal"<% if (project.category === 'personal'){ %> selected <% } %>>
-            personal</option>
-        </select>
-        <br>
-        <label for="tags">tags:</label>
-        <input type="text" name="tags" id="tags" value="<%=project.tags%>">
-        <br>
-        <label for="date">date:</label>
-        <% if (project.date) { %>
-            <input type="date" name="date" id="date" value="<%= project.date.toISOString().slice(0, 10) %>">
-        <% } else { %>
-            <input type="date" name="date" id="date">
-        <% } %>
-        <br>
+    <main>
+        <h1>Edit Project</h1>
         
-        <!-- Display existing attachments -->
-        <% if (project.attachments && project.attachments.length > 0) { %>
-            <label>Current attachments:</label><br>
-            <% project.attachments.forEach(function(attachment) { %>
-                <div>
-                    <% if (attachment.url.match(/\.(jpg|jpeg|png|gif)$/i)) { %>
-                        <img src="<%= attachment.url %>" alt="Attachment" style="max-width: 200px; max-height: 200px;"><br>
-                    <% } else { %>
-                        <a href="<%= attachment.url %>" target="_blank">View File</a><br>
-                    <% } %>
+        <form action="/project/<%=project._id%>?_method=PUT" method="post" enctype="multipart/form-data">
+            <div class="detail-item">
+                <span class="detail-label">Title:</span>
+                <input type="text" name="title" id="title" required value="<%=project.title%>">
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-label">Description:</span>
+                <textarea name="description" id="description" required><%=project.description%></textarea>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-label">Category:</span>
+                <select name="category" id="category" required>
+                    <option value="academic"<% if (project.category === 'academic'){ %> selected <% } %>>Academic</option>
+                    <option value="professional"<% if (project.category === 'professional'){ %> selected <% } %>>Professional</option>
+                    <option value="personal"<% if (project.category === 'personal'){ %> selected <% } %>>Personal</option>
+                </select>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-label">Tags:</span>
+                <input type="text" name="tags" id="tags" value="<%=project.tags%>">
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-label">Date:</span>
+                <% if (project.date) { %>
+                    <input type="date" name="date" id="date" value="<%= project.date.toISOString().slice(0, 10) %>">
+                <% } else { %>
+                    <input type="date" name="date" id="date">
+                <% } %>
+            </div>
+            
+            <% if (project.attachments && project.attachments.length > 0) { %>
+            <div class="attachments-container">
+                <h3 class="detail-label">Current Attachments:</h3>
+                <% project.attachments.forEach((attachment, index) => { %>
+                    <div class="attachment">
+                        <% if (attachment.url.match(/\.(jpg|jpeg|png|gif)$/i)) { %>
+                            <img src="<%= attachment.url %>" alt="Project Attachment">
+                            <a href="<%= attachment.url %>" target="_blank" class="action-link">View Full Image</a>
+                        <% } else { %>
+                            <a href="<%= attachment.url %>" target="_blank" class="action-link">📎 View File</a>
+                        <% } %>
+                        <form action="/project/<%= project._id %>/attachment/<%= index %>?_method=DELETE" method="POST" class="delete-attachment">
+                            <button type="submit" class="delete-btn">🗑️ Delete</button>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+            <% } %>
+            
+            <div class="detail-item">
+                <h3 class="detail-label">Add New Attachments:</h3>
+                <div class="file-input-wrapper">
+                    <div class="file-input-label">Click to browse files</div>
+                    <input type="file" name="attachments" id="attachments" multiple accept="image/*,.pdf,.zip">
                 </div>
-            <% }); %>
-        <% } %>
-        
-        <label for="attachments">Add new attachments:</label>
-        <input type="file" name="attachments" id="attachments" multiple accept="image/*,.pdf,.zip">
-        <br>
-        <button>Update</button>
-    </form>
-    <form action="/project/<%= project._id %>?_method=DELETE" method="post">
-            <button type="submit">Delete</button>
-    </form>
+            </div>
+            
+            <div class="links">
+                <button type="submit" class="btn btn-save">Update Project</button>
+                <a href="/project/<%= project._id %>" class="btn btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

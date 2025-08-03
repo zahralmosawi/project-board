@@ -1,6 +1,6 @@
 .navbar {
-    background-color: #797979;
-    background-color: #1a1818;
+    /* background-color: #797979; */
+    background-color: #ebeee2;
     height: 80px; 
     padding: 0 2rem;
     position: fixed;
@@ -61,7 +61,8 @@
 
 body {
     padding-top: 80px;
-    background-color: #b8b8b2;
-    background-color: #1a1818;
+    /* background-color: #b8b8b2;
+    background-color: #1a1818; */
+    background-color: #ebeee2;
     font-family: 'Raleway', sans-serif;
 }

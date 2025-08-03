@@ -3,39 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/detail.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <title>Project Details</title>
 </head>
 <body>
-   <%- include('../partials/navbar') %>
-   <h1>project details</h1> 
-   <p>project title: <%=project.title%></p>
-   <p>project description: <%=project.description%></p>
-   <p>project category: <%=project.category%></p>
-   <p>project tags: <%=project.tags%></p>
-   <% if (project.date) { %>
-    <p>project date: <%= new Date(project.date).toLocaleDateString() %></p>
-   <% } %>
-   <% if (project.attachments && project.attachments.length > 0) { %>
-       <p>Attachments:</p>
-       <div>
-        <% project.attachments.forEach((attachment, index)=>{ %>
-            <% if (attachment.url) { %>
-             <% if (attachment.url.match(/\.(jpg|jpeg|png|gif)$/i)) { %>
-                <img src="<%= attachment.url %>" alt="Attachment" >
-            <% }else{ %>
-                <a href="<%= attachment.url %>" target="_blank" style="text-decoration: none; color: #007bff;">📎 View File </a>
-            <% } %>
-            <form action="/project/<%= project._id %>/attachment/<%= index %>?_method=DELETE" method="POST"> 
-               <button type="submit" style="color: red; border: none; background: none; cursor: pointer;">
-                🗑️ Delete
-               </button>
-            </form>
-            <% } %>
-        <% }) %>
-       </div>
-    <% } %>
-   <p>Creator:<%=project.creator.username%></p>
-   <a href="/project/<%= project._id %>/edit">Edit Project</a>
-   <a href="/project/all">Back to Projects</a>
+    <%- include('../partials/navbar') %>
+    <main>
+        <h1>Project Details</h1>
+    
+        <div class="detail-item">
+            <span class="detail-label">Title:</span>
+            <span class="detail-value"><%= project.title %></span>
+        </div>
+        
+        <div class="detail-item">
+            <span class="detail-label">Description:</span>
+            <p class="detail-value"><%= project.description %></p>
+        </div>
+        
+        <div class="detail-item">
+            <span class="detail-label">Category:</span>
+            <span class="detail-value"><%= project.category %></span>
+        </div>
+        
+        <div class="detail-item">
+            <span class="detail-label">Tags:</span>
+            <span class="detail-value"><%= project.tags %></span>
+        </div>
+        
+        <% if (project.date) { %>
+        <div class="detail-item">
+            <span class="detail-label">Date:</span>
+            <span class="detail-value"><%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %></span>
+        </div>
+        <% } %>
+        
+        <% if (project.attachments && project.attachments.length > 0) { %>
+        <div class="attachments-container">
+            <h3 class="detail-label">Attachments:</h3>
+            <% project.attachments.forEach((attachment, index) => { %>
+                <% if (attachment.url) { %>
+                <div class="attachment">
+                    <% if (attachment.url.match(/\.(jpg|jpeg|png|gif)$/i)) { %>
+                        <img src="<%= attachment.url %>" alt="Project Attachment">
+                        <a href="<%= attachment.url %>" target="_blank" class="action-link">View Full Image</a>
+                    <% } else { %>
+                        <a href="<%= attachment.url %>" target="_blank" class="action-link">📎 View File</a>
+                    <% } %>
+                    <form action="/project/<%= project._id %>/attachment/<%= index %>?_method=DELETE" method="POST" class="delete-attachment">
+                        <button type="submit" class="delete-btn">🗑️ Delete</button>
+                    </form>
+                </div>
+                <% } %>
+            <% }) %>
+        </div>
+        <% } %>
+        
+        <div class="creator-info">
+            Created by: <%= project.creator.username %>
+        </div>
+        
+        <div class="links">
+            <a href="/project/<%= project._id %>/edit" class="link">Edit Project</a>
+            <a href="/home/dashboard" class="link">Back to Projects</a>
+        </div>
+
+        <form action="/project/<%= project._id %>?_method=DELETE" method="post">
+            <button type="submit" class="btn btn-delete">Delete Project</button>
+        </form>
+    </main>
 </body>
 </html>

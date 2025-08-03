@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #edf0e3;
+    color: #2e2e2e;
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 30px;
+    background-color: #e6e8dc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #70b098;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #70b098;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #edf0e3;
+    border-radius: 4px;
+    border: 1px solid #d7debc;
+}
+
+label {
+    color: #70b098;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #ffffff;
+    border: 1px solid #d7debc;
+    border-radius: 4px;
+    color: #2e2e2e;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.95rem;
+}
+
+input[type="text"] {
+    min-height: 40px;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2370b098'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 35px;
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.file-input-label {
+    display: block;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px dashed #d7debc;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    color: #616161;
+    font-size: 0.9rem;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+}
+
+.btn-save {
+    background-color: #70b098;
+    color: #ffffff;
+    border-color: #70b098;
+}
+
+.btn-save:hover {
+    background-color: #5d9a84;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: #70b098;
+    border-color: #70b098;
+    text-decoration: none;
+}
+
+.btn-cancel:hover {
+    background-color: #70b098;
+    color: #ffffff;
+}
