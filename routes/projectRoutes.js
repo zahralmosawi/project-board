@@ -37,7 +37,7 @@ router.post('/new', upload.array("attachments"), async (req,res)=>{
         const newProject = new Project({title, description, date, category, tags, creator: req.session.user._id, attachments})
         await newProject.save()
 
-        res.redirect('/project/all')
+        res.redirect('/home/dashboard')
     }catch(error){
         console.error(error)
         res.send('Failed to create project')
@@ -86,7 +86,7 @@ router.put('/:id', upload.array("attachments"), async(req,res)=>{
             ]
         }
         await Project.findByIdAndUpdate(id, updatedProject)
-        res.redirect('/project/all')
+        res.redirect('/home/dashboard')
     }catch(error){
         console.error(error)
         res.send('Failed to update project')
@@ -99,7 +99,7 @@ router.delete('/:id', async(req, res) => {
             return res.send('Invalid ID')
         }
         await Project.findByIdAndDelete(req.params.id)
-        res.redirect('/project/all')
+        res.redirect('/home/dashboard')
     } catch (error) {
         console.log(error)
         res.send('Failed to delete project')
