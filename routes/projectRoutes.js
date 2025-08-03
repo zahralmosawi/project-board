@@ -7,16 +7,6 @@ const mongoose = require('mongoose')
 
 router.use(isSignedIn)
 
-router.get('/all', async (req,res)=>{
-    try{
-        const projects = await Project.find({creator: req.session.user._id})
-        res.render('project/allProjects',{projects, user: req.session.user})
-    }catch(error){
-        console.error(error)
-        res.send('server error')
-    }
-})
-
 //Display the form to add
 router.get('/new', (req,res) => {
     res.render('project/newProject')
