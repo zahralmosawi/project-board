@@ -15,6 +15,17 @@
         <h1>Create New Project</h1>
         
         <form action="/project/new" method="post" enctype="multipart/form-data">
+    
+            <div class="form-group header-image-upload">
+                <label>Project Header:</label>
+                <div class="header-preview" id="headerPreview">
+                    <label class="header-upload-label">
+                        <input type="file" name="header_image" class="header-upload-input" id="headerUpload" accept="image/*">
+                        <span class="header-upload-instructions">Click to upload header image</span>
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" name="title" id="title" required>
@@ -58,6 +69,7 @@
                 <a href="/home/dashboard" class="btn btn-cancel">Cancel</a>
             </div>
         </form>
+        <script src="/js/header-preview.js"></script>
     </main>
 </body>
 </html>

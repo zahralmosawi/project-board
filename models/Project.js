@@ -25,6 +25,10 @@ const projectSchema = new mongoose.Schema({
     creator:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    headerImage: {
+    url: String,
+    filename: String
     }
 })
 

@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Project = require('../models/Project')
 const isSignedIn = require('../middleware/isSignedIn')
 const cloudinary  = require("../config/cloudinary")
-const upload = require('../middleware/upload')
+const { uploadProjectFiles } = require('../middleware/upload')
 const mongoose = require('mongoose')
 
 router.use(isSignedIn)
@@ -12,25 +12,26 @@ router.get('/new', (req,res) => {
     res.render('project/newProject')
 })
 
-router.post('/new', upload.array("attachments"), async (req,res)=>{
-    try{
-        const {title, description, date, category, tags} = req.body
-        
-        let attachments = []
-        if (req.files && req.files.length > 0) {
-            attachments = req.files.map(file => ({
-                url: file.path || '',
+router.post('/new', uploadProjectFiles, async (req, res) => {
+    try {
+        const { title, description, date, category, tags } = req.body;
+
+        const newProject = new Project({title, description, date, category, tags,
+            creator: req.session.user._id,
+            headerImage: req.files.header_image ? {
+                url: req.files.header_image[0].path,
+                public_id: req.files.header_image[0].filename
+            } : null,
+            attachments: req.files.attachments ? req.files.attachments.map(file => ({
+                url: file.path,
                 public_id: file.filename
-            }))
-        }
+            })) : []
+        })
 
-        const newProject = new Project({title, description, date, category, tags, creator: req.session.user._id, attachments})
-        await newProject.save()
-
+        await newProject.save();
         res.redirect('/home/dashboard')
-    }catch(error){
-        console.error(error)
-        res.send('Failed to create project')
+    } catch(error) {
+        console.error('Project creation error:', error)
     }
 })
 
@@ -60,7 +61,7 @@ router.get('/:id/edit', async(req,res)=>{
     }
 })
 
-router.put('/:id', upload.array("attachments"), async(req,res)=>{
+router.put('/:id', uploadProjectFiles, async(req,res)=>{
     try{
         const{id} = req.params
         const {title, description, date, category, tags} = req.body

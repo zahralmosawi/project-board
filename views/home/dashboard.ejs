@@ -13,28 +13,36 @@
      <main>
         <% if (projects && projects.length > 0) { %>
         <h1>All Projects Here</h1>
-        <!-- not working! -->
         <p id="add-link"><a href="/project/new">Add More!</a></p> 
         <div class="projects-container">
             <% projects.forEach(project=>{%>
-            <div class="card">
-                <div class="card-image"></div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <% if(project.headerImage && project.headerImage.url) { %>
+                            <img src="<%= project.headerImage.url %>" alt="<%= project.title %>" class="card-image-img">
+                        <% } else { %>
+                            <div class="default-image"></div>
+                        <% } %>
+                    </div>
+                
                 <p class="card-title"><%= project.title %></p>
                 <p class="card-body"><%= project.category %></p>
+
                 <% if(project.date){ %>
                 <p class="date"><%= new Date(project.date).toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric'}) %></p>
                 <% } %>
                 <a class="footer" href="/project/<%=project._id%>">Details</a>
                 </div>
-            <% }) %>
-            </div>
-        <% } else { %>
+                <% }) %>
+        </div>
+            <% } else { %>
             <div class="empty-state">
                 <!-- <img src="/images/n.png" alt="No Projects" class="picture"/> -->
                 <p>No projects yet</p>
                 <a href="/project/new">Add Your First Project</a>
             </div>
-        <% } %>
+            <% } %>
     </main>
 </body>
 </html>
