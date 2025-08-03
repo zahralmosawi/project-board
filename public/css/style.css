@@ -40,7 +40,8 @@ a{
     border-radius: 4px;
     z-index: 1; 
     font-size: 20px;
-    color: #ebe3e3;
+    /* color: #ebe3e3; */
+    color: #484847;
 }
 
 a:hover{
@@ -50,12 +51,13 @@ a:hover{
 .logo {
     position: absolute;
     top:50px;
-    left: -25px;
+    left: -15px;
     z-index: 0;
-    height: 300px; 
+    /* height: 300px;  */
+    height: 250px; 
     width: auto;
     mix-blend-mode: multiply;
-    margin-top: -150px;
+    margin-top: -129px;
     background-color: transparent;
 }
 
