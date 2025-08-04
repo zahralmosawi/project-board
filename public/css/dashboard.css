@@ -28,6 +28,15 @@ h1 {
     font-size: 17px;
 }
 
+a{
+    color:#484847;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #85857A;
+}
+
 .projects-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -105,14 +114,26 @@ h1 {
     margin-top: 50px;
 }
 
-.empty-state a {
-    color: #70b098;
-    text-decoration: none;
+.empty-state p{
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 100px; 
+    font-size: 3rem;
+}
+.empty-state a{
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 20px; 
 }
 
-.empty-state a:hover {
+/* .empty-state a {
+    color: #70b098;
+    text-decoration: none;
+} */
+
+/* .empty-state a:hover {
     text-decoration: underline;
-}
+} */
 
 /* .picture {
     max-width: 100%;

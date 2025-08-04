@@ -60,8 +60,7 @@
                         <% } %>
                         <form action="/project/<%= project._id %>/attachment/<%= index %>?_method=DELETE" method="POST" class="delete-attachment">
                             <button type="submit" class="delete-btn">🗑️ Delete</button>
-                        </form>
-                    </div>
+                        </form>        
                 <% }) %>
             </div>
             <% } %>
@@ -71,6 +70,7 @@
                 <div class="file-input-wrapper">
                     <div class="file-input-label">Click to browse files</div>
                     <input type="file" name="attachments" id="attachments" multiple accept="image/*,.pdf,.zip">
+                    <div id="file-selected-feedback" class="selected-files-container"></div>
                 </div>
             </div>
             
@@ -79,6 +79,7 @@
                 <a href="/project/<%= project._id %>" class="btn btn-cancel">Cancel</a>
             </div>
         </form>
+        <script src="/js/attachments-feedback.js"></script>
     </main>
 </body>
 </html>

@@ -198,3 +198,22 @@ select {
 .header-preview.has-image:hover .header-upload-instructions {
     opacity: 1;
 }
+
+.selected-files-container {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.selected-file {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+.file-icon {
+    margin-right: 8px;
+    color: #555;
+}

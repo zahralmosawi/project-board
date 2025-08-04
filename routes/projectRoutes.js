@@ -12,26 +12,58 @@ router.get('/new', (req,res) => {
     res.render('project/newProject')
 })
 
-router.post('/new', uploadProjectFiles, async (req, res) => {
+// router.post('/new', uploadProjectFiles, async (req, res) => {
+//     try {
+//         const { title, description, date, category, tags } = req.body;
+
+//         const newProject = new Project({title, description, date, category, tags,
+//             creator: req.session.user._id,
+//             headerImage: req.files.header_image ? {
+//                 url: req.files.header_image[0].path,
+//                 public_id: req.files.header_image[0].filename
+//             } : null,
+//             attachments: req.files.attachments ? req.files.attachments.map(file => ({
+//                 url: file.path,
+//                 public_id: file.filename
+//             })) : []
+//         })
+
+//         await newProject.save();
+//         res.redirect('/home/dashboard')
+//     } catch(error) {
+//         console.error('Project creation error:', error)
+//     }
+// })
+
+router.post("/new", uploadProjectFiles, async (req, res) => {
     try {
         const { title, description, date, category, tags } = req.body;
 
-        const newProject = new Project({title, description, date, category, tags,
+        const newProject = {title, description, date, category, tags, 
             creator: req.session.user._id,
-            headerImage: req.files.header_image ? {
+            headerImage: null,
+            attachments: []
+        }
+
+        if (req.files && req.files.header_image && req.files.header_image[0]) {
+            newProject.headerImage = {
                 url: req.files.header_image[0].path,
                 public_id: req.files.header_image[0].filename
-            } : null,
-            attachments: req.files.attachments ? req.files.attachments.map(file => ({
+            }
+        }
+
+        if (req.files && req.files.attachments) {
+            newProject.attachments = req.files.attachments.map(file => ({
                 url: file.path,
                 public_id: file.filename
-            })) : []
-        })
+            }))
+        }
 
-        await newProject.save();
+        const createdProject = await Project.create(newProject)
         res.redirect('/home/dashboard')
+
     } catch(error) {
-        console.error('Project creation error:', error)
+        console.error('Error creating project:', error)
     }
 })
 
@@ -61,26 +93,35 @@ router.get('/:id/edit', async(req,res)=>{
     }
 })
 
-router.put('/:id', uploadProjectFiles, async(req,res)=>{
-    try{
-        const{id} = req.params
-        const {title, description, date, category, tags} = req.body
-        const updatedProject = {title, description, date, category, tags}
 
-        if(req.files && req.files.length > 0){
-            updatedProject.attachments = [
-                ...(await Project.findById(id)).attachments || [], 
-                ...req.files.map(file => ({  
+
+router.put('/:id', uploadProjectFiles, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, description, date, category, tags } = req.body
+        
+        const currentProject = await Project.findById(id);
+        
+        const updateData = {title, description, date, category, tags,
+            attachments: currentProject.attachments || []
+        }
+
+        if (req.files && req.files.attachments) {
+            updateData.attachments = [
+                ...updateData.attachments,
+                ...req.files.attachments.map(file => ({
                     url: file.path,
                     public_id: file.filename
                 }))
             ]
         }
-        await Project.findByIdAndUpdate(id, updatedProject)
-        res.redirect('/home/dashboard')
-    }catch(error){
-        console.error(error)
-        res.send('Failed to update project')
+
+        await Project.findByIdAndUpdate(id, updateData)
+        res.redirect(`/project/${id}`)
+        
+    } catch (error) {
+        console.error('Update error:', error);
+
     }
 })
 

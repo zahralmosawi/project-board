@@ -39,7 +39,7 @@ form {
 
 label {
     font-size: 1.1rem;
-    color: #373636; 
+    /* color: #373636;  */
     color: #85857A; 
     font-weight: 200;
     min-width: 100px;
