@@ -19,7 +19,8 @@ The application allows users to securely log in and manage a personal gallery of
 <img width="600" height="600" src="public/images/website.png" alt="Screenshot of the web ">
 
 ## 🌐 Live Demo
-Have your gallery for everything you create![Projects Board](https://project-board-j6oz.onrender.com)
+Have your gallery for everything you create [Projects Board](https://project-board-j6oz.onrender.com)
+
 
 ## Technologies
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
