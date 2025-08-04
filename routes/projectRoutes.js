@@ -12,28 +12,6 @@ router.get('/new', (req,res) => {
     res.render('project/newProject')
 })
 
-// router.post('/new', uploadProjectFiles, async (req, res) => {
-//     try {
-//         const { title, description, date, category, tags } = req.body;
-
-//         const newProject = new Project({title, description, date, category, tags,
-//             creator: req.session.user._id,
-//             headerImage: req.files.header_image ? {
-//                 url: req.files.header_image[0].path,
-//                 public_id: req.files.header_image[0].filename
-//             } : null,
-//             attachments: req.files.attachments ? req.files.attachments.map(file => ({
-//                 url: file.path,
-//                 public_id: file.filename
-//             })) : []
-//         })
-
-//         await newProject.save();
-//         res.redirect('/home/dashboard')
-//     } catch(error) {
-//         console.error('Project creation error:', error)
-//     }
-// })
 
 router.post("/new", uploadProjectFiles, async (req, res) => {
     try {
