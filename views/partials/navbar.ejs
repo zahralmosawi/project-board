@@ -4,11 +4,11 @@
             <img src="/images/PB-logo.png" alt="Project Board Logo" id="logo">
         </div>
         <div class="navbar-links">
-            <a href="/" class="navbar-link">Home</a>
             <% if(user){ %>
+                <a href="/home/dashboard" class="navbar-link">Dashboard</a>
                 <a href="/auth/logout" class="navbar-link">Logout</a>
             <% }else{ %>
-                <a href="/auth/sign-up" class="navbar-link">Sign Up</a>
+                <a href="/" class="navbar-link">Home</a>
             <% } %>
         </div>
     </div>
