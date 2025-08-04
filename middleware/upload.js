@@ -2,7 +2,7 @@ const multer = require('multer')
 const { CloudinaryStorage } = require('multer-storage-cloudinary')
 const cloudinary = require('../config/cloudinary')
 
-// upload handler for both files
+// Upload handler for both files
 const uploadProjectFiles = multer({
   storage: new CloudinaryStorage({
     cloudinary: cloudinary,
@@ -22,11 +22,11 @@ const uploadProjectFiles = multer({
     }
   }),
   limits: { fileSize: 25 * 1024 * 1024 }, 
-  fileFilter: (req, file, cb) => {
-    cb(null, true)
+  fileFilter: (req, file, cb) => { //Multer filter runs before the file reaches cloudinary
+    cb(null, true) //Everything passes
   }
 }).fields([
-  { name: 'header_image', maxCount: 1 },
+  { name: 'header_image', maxCount: 1 }, //Handles multiple files from two fields
   { name: 'attachments', maxCount: 10 }
 ])
 
