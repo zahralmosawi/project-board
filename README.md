@@ -16,7 +16,7 @@ This full-stack CRUD application was built to gain expertise using the MEN Stack
 The application allows users to securely log in and manage a personal gallery of their academic, professional, and personal projects. Each user can create, update, and delete projects, complete with categories, descriptions.
 
 
-<img width="600" height="600" src="public/ProjectsBoard" alt="Screenshot of the web ">
+<img width="600" height="600" src="/public/images/ProjectsBoard.png" alt="Screenshot of the web ">
 
 ## 🌐 Live Demo
 [Try it now!](https://project-board-j6oz.onrender.com)
