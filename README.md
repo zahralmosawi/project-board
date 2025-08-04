@@ -16,17 +16,23 @@ This full-stack CRUD application was built to gain expertise using the MEN Stack
 The application allows users to securely log in and manage a personal gallery of their academic, professional, and personal projects. Each user can create, update, and delete projects, complete with categories, descriptions.
 
 
-<img width="600" height="600" src="/public/images/ProjectsBoard.png" alt="Screenshot of the web ">
+<img width="600" height="600" src="/public/images/website.png" alt="Screenshot of the web ">
 
 ## 🌐 Live Demo
 [Try it now!](https://project-board-j6oz.onrender.com)
 
 ## Technologies
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white)
-![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)
+![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)
+
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white)
+
+![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)
+
+![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)
 
 
 ## Attributions
