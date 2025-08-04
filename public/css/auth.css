@@ -13,13 +13,20 @@ body {
     padding-top: 80px;
 }
 
+h1{
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    text-align: center; 
+}
+
 /* Form styling */
 form {
     background-color: transparent;
     padding: 2rem;
     width: 100%;
     max-width: 500px;
-    margin: 7rem auto;
+    margin: 3.5rem auto;
 }
 
 /* Input fields styling */
