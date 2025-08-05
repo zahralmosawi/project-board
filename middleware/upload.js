@@ -11,7 +11,7 @@ const uploadProjectFiles = multer({
         return {
           folder: 'project-headers',
           allowed_formats: ['jpg', 'png', 'jpeg'],
-          transformation: [{ width: 1200, crop: 'limit' }]
+          transformation: [{ width: 1200, crop: 'limit' }] // Resize header images
         }
       }
       return {

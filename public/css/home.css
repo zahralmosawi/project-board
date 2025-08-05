@@ -2,9 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: "Raleway", sans-serif;
-    /* background-color: #b8b8b2;
-    background-color: #1a1818;
-    background-color: #ebeee2; */
     background-color: #edf0e3;
 } 
 body {   
@@ -40,7 +37,6 @@ a{
     border-radius: 4px;
     z-index: 1; 
     font-size: 20px;
-    /* color: #ebe3e3; */
     color: #484847;
 }
 
@@ -53,7 +49,6 @@ a:hover{
     top:50px;
     left: -15px;
     z-index: 0;
-    /* height: 300px;  */
     height: 250px; 
     width: auto;
     mix-blend-mode: multiply;

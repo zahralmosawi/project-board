@@ -39,7 +39,7 @@ router.post('/sign-up', async(req,res)=>{
 })
 
 router.get("/login", (req, res) => {
-    res.render("auth/login.ejs", { error: null }) //!
+    res.render("auth/login.ejs", { error: null }) 
 })
 
 router.post("/login", async (req, res) => {
@@ -66,8 +66,8 @@ router.post("/login", async (req, res) => {
 
         res.redirect("/home/dashboard") 
     } catch (error) {
-        console.error("Error during sign-in:", error);
-        res.render("auth/login", { error: "An unexpected error occurred." });
+        console.error("Error during sign-in:", error)
+        res.render("auth/login", { error: "An unexpected error occurred." })
     }
 })
 
@@ -75,4 +75,5 @@ router.get("/logout", (req, res) => {
     req.session.destroy()
     res.redirect("/auth/login")
 })
+
 module.exports = router

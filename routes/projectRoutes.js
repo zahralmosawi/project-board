@@ -12,7 +12,7 @@ router.get('/new', (req,res) => {
     res.render('project/newProject')
 })
 
-
+// Create a new project
 router.post("/new", uploadProjectFiles, async (req, res) => {
     try {
         const { title, description, date, category, tags } = req.body;
@@ -23,6 +23,7 @@ router.post("/new", uploadProjectFiles, async (req, res) => {
             attachments: []
         }
 
+        // If header image is uploaded, save its url and public_id
         if (req.files && req.files.header_image && req.files.header_image[0]) {
             newProject.headerImage = {
                 url: req.files.header_image[0].path,
@@ -30,6 +31,7 @@ router.post("/new", uploadProjectFiles, async (req, res) => {
             }
         }
 
+        // If attachments are uploaded, save their urls and public_ids
         if (req.files && req.files.attachments) {
             newProject.attachments = req.files.attachments.map(file => ({
                 url: file.path,
@@ -45,19 +47,21 @@ router.post("/new", uploadProjectFiles, async (req, res) => {
     }
 })
 
+// Display all projects
 router.get('/:id', async(req,res)=>{
     try{
+        // Validate project ID
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.send('Invalid project ID')
         }
         const foundProject = await Project.findById(req.params.id).populate('creator')
         res.render('project/project-details.ejs', {project: foundProject})
     }catch(error){
-        console.log(error)
-        res.send('Project not found')
+        console.error('roject not found', error)
     }
 })
 
+// Display the edit form for a project
 router.get('/:id/edit', async(req,res)=>{
     try{
         const project = await Project.findById(req.params.id)
@@ -66,27 +70,27 @@ router.get('/:id/edit', async(req,res)=>{
         }
         res.render('project/project-edit.ejs', {project, user: req.session.user})
     }catch(error){
-        console.error(error)
-        res.send('server error')
+        console.error('server error:', error)
     }
 })
 
 
-
+// Update a project
 router.put('/:id', uploadProjectFiles, async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.params
         const { title, description, date, category, tags } = req.body
         
-        const currentProject = await Project.findById(id);
+        const currentProject = await Project.findById(id)
         
         const updateData = {title, description, date, category, tags,
             attachments: currentProject.attachments || []
         }
 
+        // If header image is uploaded, update its url and public_id
         if (req.files && req.files.attachments) {
             updateData.attachments = [
-                ...updateData.attachments,
+                ...updateData.attachments, // Combine existing attachments with new ones
                 ...req.files.attachments.map(file => ({
                     url: file.path,
                     public_id: file.filename
@@ -98,12 +102,13 @@ router.put('/:id', uploadProjectFiles, async (req, res) => {
         res.redirect(`/project/${id}`)
         
     } catch (error) {
-        console.error('Update error:', error);
-
+        console.error('Update error:', error)
     }
 })
 
+// Delete a project
 router.delete('/:id', async(req, res) => {
+    // Validate project ID
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.send('Invalid ID')
@@ -116,26 +121,25 @@ router.delete('/:id', async(req, res) => {
     }
 })
 
+// Delete an attachment from a project
 router.delete('/:projectId/attachment/:attachmentIndex', async(req,res)=>{
     try{
         const {projectId, attachmentIndex} = req.params
         const project = await Project.findById(projectId)
 
-        //validition
+        // Validate project ID
         if(!project){
             return res.send("Project not found")
         }
 
-        project.attachments.splice(attachmentIndex, 1)
+        // Remove the attachment at the specified index
+        project.attachments.splice(attachmentIndex, 1) 
         await project.save()
 
         res.redirect(`/project/${projectId}/edit`)
     }catch(error){
-        console.error(error)
-        res.send('Failed to delete attachment')
+        console.error('Failed to delete attachment', error)
     }
 })
-
-
 
 module.exports = router

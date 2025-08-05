@@ -27,10 +27,10 @@ document.getElementById('attachments').addEventListener('change', function(e) {
             const fileName = document.createElement('span')
             fileName.textContent = file.name
             
-            fileItem.appendChild(icon);
+            fileItem.appendChild(icon)
             fileItem.appendChild(fileName)
             fileList.appendChild(fileItem)
-        });
+        })
         
         feedbackContainer.appendChild(fileList)
     } else {
